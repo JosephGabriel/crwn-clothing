@@ -5,7 +5,7 @@ import "./MenuItem.scss";
 
 const MenuItem = ({ title, imageUrl, size, history, match, linkUrl }) => {
   return (
-    <divs
+    <div
       className={`${size} menu-item`}
       onClick={() => history.push(`${match.url}${linkUrl}`)}
     >
@@ -17,7 +17,7 @@ const MenuItem = ({ title, imageUrl, size, history, match, linkUrl }) => {
         <h1 className="title">{title.toUpperCase()}</h1>
         <span className="subtitle">SHOP NOW</span>
       </div>
-    </divs>
+    </div>
   );
 };
 
