@@ -1,15 +1,15 @@
-import React from 'react'
+import React from "react";
 
-import "./Home.scss"
+import { HomeContainer } from "./HomeStyles";
 
-import DirectoryMenu from "../../components/DirectoryMenu/DirectoryMenu"
+import DirectoryMenu from "../../components/DirectoryMenu/DirectoryMenu";
 
 const Home = () => {
-    return (
-        <div className="homepage">
-            <DirectoryMenu />
-        </div>
-    )
-}
+  return (
+    <HomeContainer>
+      <DirectoryMenu />
+    </HomeContainer>
+  );
+};
 
-export default Home
+export default Home;
