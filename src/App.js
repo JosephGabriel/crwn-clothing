@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
 import { selectCurrentUser } from "./redux/user/userSelectors";
+import { checkUserSession } from "./redux/user/userActions";
 
 import "./App.css";
 
@@ -13,39 +14,20 @@ import Home from "./pages/Home/Home";
 import Shop from "./pages/Shop/Shop";
 import Sign from "./pages/Sign/Sign";
 import Checkout from "./pages/Checkout/Checkout";
-
-import { auth, createUserProfile } from "./firebase/firebase";
-
-import { setCurrentUser } from "./redux/user/userActions";
 class App extends Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser } = this.props;
-
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-      if (userAuth) {
-        const userRef = await createUserProfile(userAuth);
-
-        userRef.onSnapshot((snapshot) => {
-          setCurrentUser({
-            currentUser: {
-              id: snapshot.id,
-              ...snapshot.data(),
-            },
-          });
-        });
-      } else {
-        setCurrentUser(userAuth);
-      }
-    });
+    const {checkUserSession} = this.props
+    checkUserSession()
   }
 
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
-  }
+  // componentWillUnmount() {
+  //   this.unsubscribeFromAuth();
+  // }
 
   render() {
+    console.log(this.props.currentUser)
     return (
       <div className="App">
         <Header />
@@ -57,6 +39,7 @@ class App extends Component {
             exact
             path="/sign"
             render={() =>
+              
               this.props.currentUser ? <Redirect to="/" /> : <Sign />
             }
           />
@@ -71,7 +54,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+  checkUserSession: () => dispatch(checkUserSession()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps,mapDispatchToProps)(App);
