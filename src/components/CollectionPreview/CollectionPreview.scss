@@ -13,3 +13,15 @@
     justify-content: space-between;
   }
 }
+
+@media screen and (max-width: 800px) {
+  .collection-preview {
+    align-items: center;
+  }
+
+  .preview {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+}
