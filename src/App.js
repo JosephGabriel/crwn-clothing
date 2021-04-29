@@ -3,6 +3,8 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
+import { GlobalStyle } from "./globalStyles";
+
 import { selectCurrentUser } from "./redux/user/userSelectors";
 import { checkUserSession } from "./redux/user/userActions";
 
@@ -22,6 +24,7 @@ const App = ({ checkUserSession, currentUser }) => {
 
   return (
     <div className="App">
+      <GlobalStyle />
       <Header />
       <Switch>
         <Route exact path="/" component={Home} />
