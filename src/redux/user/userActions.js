@@ -9,17 +9,8 @@ export const emailSignInStart = (emailAndPassword) => ({
   payload: emailAndPassword,
 });
 
-<<<<<<< HEAD
-export const checkUserSession = () => ({
-  type: UserActionTypes.CHECK_USER_SESSION,
-});
-
-export const signInSuccess = (user) => ({
-  type: UserActionTypes.SIGN_IN_SUCESS,
-=======
 export const signInSucess = (user) => ({
   type: UserActionTypes.SIGN_IN_SUCCESS,
->>>>>>> 1dd27fa
   payload: user,
 });
 
@@ -27,8 +18,6 @@ export const signInFailure = (error) => ({
   type: UserActionTypes.SIGN_IN_FAILURE,
   payload: error,
 });
-<<<<<<< HEAD
-=======
 
 export const checkUserSession = () => ({
   type: UserActionTypes.CHECK_USER_SESSION,
@@ -62,4 +51,3 @@ export const signUpFailure = (error) => ({
   type: UserActionTypes.SIGN_UP_FAILURE,
   payload: error,
 });
->>>>>>> 1dd27fa
