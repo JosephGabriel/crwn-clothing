@@ -2,14 +2,12 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const path = require("path");
-require("dotenv").config;
 
 if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config;
 }
 
-const stripe = require("stripe")(
-  "sk_test_51I6L4NBp2IrUmTJGKmkGIQdbpdpKYjtG4gie3xSkrFaBixoO9PwSQ3vSHjaGaubNuISi5F4oGAGkZ9lxYxqPEpJd00SO4sQWrq"
-);
+const stripe = require("stripe")(process.env.STRIPE_KEY);
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -36,13 +34,12 @@ app.listen(port, (error) => {
 app.post("/payment", (req, res) => {
   const body = {
     source: req.body.token.id,
-    amount: req.body.amout,
+    amount: req.body.amount,
     currency: "usd",
   };
 
   stripe.charges.create(body, (strError, strResponse) => {
     if (strError) {
-      console.log(strError);
       res.status(500).send({ error: strError });
     } else {
       res.status(200).send({ success: strResponse });
